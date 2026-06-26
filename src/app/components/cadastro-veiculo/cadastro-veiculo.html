@@ -1,0 +1,53 @@
+<div class="layout">
+  <app-sidebar></app-sidebar>
+
+  <div class="main">
+    <h2>Cadastro de Veículo</h2>
+
+    <div class="card">
+      <div class="field">
+        <label>Tipo</label>
+        <div class="tipo-group">
+          <button class="tipo-btn" [class.selected]="tipo === 'Carro'" (click)="selecionarTipo('Carro')">🚗 Carro</button>
+          <button class="tipo-btn" [class.selected]="tipo === 'Moto'" (click)="selecionarTipo('Moto')">🏍️ Moto</button>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Placa</label>
+        <input type="text" [(ngModel)]="placa" placeholder="Ex: ABC-1234" maxlength="8">
+      </div>
+
+      <div class="field">
+        <label>Modelo</label>
+        <input type="text" [(ngModel)]="modelo" placeholder="Ex: Honda Civic">
+      </div>
+
+      <div class="field">
+        <label>Cor</label>
+        <input type="text" [(ngModel)]="cor" placeholder="Ex: Preto">
+      </div>
+
+      <button class="btn" (click)="salvar()">Salvar Veículo</button>
+      <div class="msg" [class.ok]="msgOk" *ngIf="msg">{{ msg }}</div>
+    </div>
+
+    <h3>Veículos cadastrados</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Tipo</th><th>Placa</th><th>Modelo</th><th>Cor</th><th>Ação</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let v of veiculos">
+          <td>{{ v.tipo === 'Moto' ? '🏍️' : '🚗' }} {{ v.tipo }}</td>
+          <td>{{ v.placa }}</td>
+          <td>{{ v.modelo }}</td>
+          <td>{{ v.cor }}</td>
+          <td><button class="btn-excluir" (click)="excluir(v.id)">🗑 Excluir</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

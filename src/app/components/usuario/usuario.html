@@ -1,0 +1,46 @@
+<div class="layout">
+  <app-sidebar></app-sidebar>
+
+  <div class="main">
+    <h2>⚙️ Gerenciar Usuários</h2>
+
+    <div class="card">
+      <h3>Criar novo usuário</h3>
+      <div class="field">
+        <label>Nome</label>
+        <input type="text" [(ngModel)]="nome" placeholder="Nome completo">
+      </div>
+      <div class="field">
+        <label>Login (usuário)</label>
+        <input type="text" [(ngModel)]="email" placeholder="Ex: joao">
+      </div>
+      <div class="field">
+        <label>Senha</label>
+        <input type="password" [(ngModel)]="senha" placeholder="Senha">
+      </div>
+      <button class="btn" (click)="criar()">➕ Criar Usuário</button>
+      <div class="msg" [class.ok]="msgOk" *ngIf="msg">{{ msg }}</div>
+    </div>
+
+    <h3>Usuários cadastrados</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>#</th><th>Nome</th><th>Login</th><th>Admin</th><th>Ação</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let u of usuarios; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ u.nome }}</td>
+          <td>{{ u.email }}</td>
+          <td>{{ u.isAdmin ? '✅ Sim' : '—' }}</td>
+          <td>
+            <button *ngIf="!u.isAdmin" class="btn-excluir" (click)="excluir(u.id)">🗑 Excluir</button>
+            <span *ngIf="u.isAdmin" style="color:#aaa; font-size:12px;">— Admin</span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

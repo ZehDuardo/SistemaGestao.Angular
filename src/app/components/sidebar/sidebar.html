@@ -1,0 +1,15 @@
+<div class="sidebar">
+  <div class="logo">
+    <div>
+      🅿️ Estacionamento<br>Central Park
+      <span>Sistema de Gestão</span>
+    </div>
+    <button class="btn-sair-topo" (click)="sair()" title="Sair">🚪</button>
+  </div>
+
+  <a routerLink="/dashboard" routerLinkActive="active">🅿 Vagas</a>
+  <a routerLink="/cadastro-veiculo" routerLinkActive="active">🚗 Cadastro de veículo</a>
+  <a routerLink="/cadastro-cliente" routerLinkActive="active">👤 Cadastro de clientes</a>
+  <a routerLink="/relatorio" routerLinkActive="active">📊 Relatório</a>
+  <a *ngIf="isAdmin" routerLink="/usuario" routerLinkActive="active">⚙️ Usuário</a>
+</div>

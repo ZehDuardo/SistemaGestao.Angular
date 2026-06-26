@@ -1,0 +1,47 @@
+.sidebar {
+  width: 200px;
+  background: #1a1a2e;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 0;
+  min-height: 100vh;
+}
+.logo {
+  padding: 0 20px 24px;
+  font-size: 13px;
+  color: #aaa;
+  border-bottom: 1px solid #333;
+  margin-bottom: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.logo span {
+  display: block;
+  font-size: 11px;
+  color: #666;
+  margin-top: 2px;
+}
+.btn-sair-topo {
+  background: #e74c3c;
+  border: none;
+  color: white;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+.btn-sair-topo:hover { background: #c0392b; }
+a {
+  display: block;
+  padding: 12px 20px;
+  color: #ccc;
+  text-decoration: none;
+  font-size: 14px;
+  transition: background 0.2s;
+}
+a:hover { background: #2a2a4a; color: white; }
+a.active { background: #4f6ef7; color: white; }

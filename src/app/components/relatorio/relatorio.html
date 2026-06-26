@@ -1,0 +1,53 @@
+<div class="layout">
+  <app-sidebar></app-sidebar>
+
+  <div class="main">
+    <h2>📊 Relatório de Entradas e Saídas</h2>
+
+    <div class="cards-topo">
+      <div class="card-info">
+        <div class="num">{{ totalEntradas }}</div>
+        <div class="label">Total de entradas</div>
+      </div>
+      <div class="card-info">
+        <div class="num">{{ totalSaidas }}</div>
+        <div class="label">Total de saídas</div>
+      </div>
+      <div class="card-info">
+        <div class="num">{{ totalAtivas }}</div>
+        <div class="label">Vagas ocupadas agora</div>
+      </div>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Vaga</th>
+          <th>Veículo</th>
+          <th>Placa</th>
+          <th>Cliente</th>
+          <th>Entrada</th>
+          <th>Saída</th>
+          <th>Permanência</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let h of historico">
+          <td><b>{{ h.numeroVaga }}</b></td>
+          <td>{{ getIco(h) }} {{ h.veiculo?.modelo }}</td>
+          <td>{{ h.veiculo?.placa }}</td>
+          <td>{{ h.cliente?.nome }}</td>
+          <td>{{ h.dataEntrada | date:'dd/MM/yyyy HH:mm' }}</td>
+          <td>{{ h.dataSaida ? (h.dataSaida | date:'dd/MM/yyyy HH:mm') : '—' }}</td>
+          <td>⏱ {{ getPermanencia(h) }}</td>
+          <td>
+            <span class="badge" [class.saiu]="h.dataSaida" [class.ativo]="!h.dataSaida">
+              {{ h.dataSaida ? '✅ Saiu' : '🔴 Dentro' }}
+            </span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,22 @@
+<div class="page">
+  <div class="card">
+    <div class="icon">🅿️</div>
+    <h2>Sistema de Gestão</h2>
+    <p>Faça login para continuar</p>
+
+    <div class="input-group">
+      <span class="ico">👤</span>
+      <input type="text" [(ngModel)]="usuario" placeholder="Usuário">
+    </div>
+
+    <div class="input-group">
+      <span class="ico">🔒</span>
+      <input [type]="mostrarSenha ? 'text' : 'password'" [(ngModel)]="senha" placeholder="Senha">
+      <span class="eye" (click)="mostrarSenha = !mostrarSenha">👁</span>
+    </div>
+
+    <button class="btn" (click)="login()">Entrar</button>
+
+    <div class="msg" [class.ok]="msgOk" *ngIf="msg">{{ msg }}</div>
+  </div>
+</div>

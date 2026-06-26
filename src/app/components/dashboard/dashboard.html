@@ -1,0 +1,61 @@
+<div class="layout">
+  <app-sidebar></app-sidebar>
+
+  <div class="main">
+    <h2>Vagas de estacionamento</h2>
+    <div class="legenda">
+      <span><div class="dot livre"></div> Livre</span>
+      <span><div class="dot ocupada"></div> Ocupada</span>
+    </div>
+
+    <div class="vagas">
+      <div *ngFor="let vaga of vagas"
+           class="vaga"
+           [class.ocupada]="getOcupacao(vaga)"
+           (click)="abrirModal(vaga)">
+        <span class="num">{{ vaga }}</span>
+        <span class="ico">{{ getIco(vaga) }}</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL -->
+<div class="overlay" *ngIf="modalAberto" (click)="fecharModal()">
+  <div class="modal" (click)="$event.stopPropagation()">
+
+    <h3>Vaga {{ vagaSelecionada }} — {{ ocupacaoSelecionada ? 'Ocupada' : 'Livre' }}</h3>
+
+    <div *ngIf="ocupacaoSelecionada" class="modal-info">
+      {{ ocupacaoSelecionada.veiculo?.tipo === 'Moto' ? '🏍️' : '🚗' }}
+      <b>Veículo:</b> {{ ocupacaoSelecionada.veiculo?.modelo }} — {{ ocupacaoSelecionada.veiculo?.placa }}<br>
+      👤 <b>Cliente:</b> {{ ocupacaoSelecionada.cliente?.nome }}<br>
+      🕐 <b>Entrada:</b> {{ ocupacaoSelecionada.dataEntrada | date:'dd/MM/yyyy HH:mm' }}
+    </div>
+
+    <div *ngIf="!ocupacaoSelecionada">
+      <div class="field">
+        <label>Veículo</label>
+        <select [(ngModel)]="veiculoId">
+          <option [value]="0">Selecione o veículo</option>
+          <option *ngFor="let v of veiculos" [value]="v.id">
+            {{ v.placa }} — {{ v.modelo }} ({{ v.tipo }})
+          </option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Cliente</label>
+        <select [(ngModel)]="clienteId">
+          <option [value]="0">Selecione o cliente</option>
+          <option *ngFor="let c of clientes" [value]="c.id">{{ c.nome }}</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="modal-btns">
+      <button *ngIf="!ocupacaoSelecionada" class="btn-entrada" (click)="registrarEntrada()">✅ Registrar Entrada</button>
+      <button *ngIf="ocupacaoSelecionada" class="btn-saida" (click)="registrarSaida()">🚪 Registrar Saída</button>
+      <button class="btn-cancelar" (click)="fecharModal()">Cancelar</button>
+    </div>
+  </div>
+</div>
